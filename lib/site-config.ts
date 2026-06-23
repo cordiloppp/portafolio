@@ -11,7 +11,7 @@ export const siteConfig = {
   role: "Software Developer enfocado en arquitectura",
   location: "Guatemala",
   // Placeholder — replace with your real address before publishing.
-  email: "jonathan.molinero@email.com",
+  email: "molineroperez9@email.com",
   description:
     "Estudiante de Ingeniería en Software próximo a graduarme. Construyo aplicaciones web escalables con Next.js y TypeScript, y me interesa el diseño de sistemas y escribir código que otros puedan mantener.",
   // Set NEXT_PUBLIC_SITE_URL in Vercel to your production domain.
