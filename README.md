@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portafolio — Jonathan Molinero
 
-## Getting Started
+Portafolio profesional construido con un enfoque **SSG-first**: contenido en
+archivos, interactividad en islas, todo prerenderizado en build.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Next.js 15 (App Router) · React 19 · TypeScript (estricto) · Tailwind CSS v4 ·
+shadcn/ui · Motion · Vercel.
+
+## Arquitectura
+
+- **Server Components por defecto.** Solo `navbar`, `theme-toggle` y `reveal`
+  son Client Components (las "islas" de interactividad).
+- **Contenido en `content/projects/*.mdx`.** Frontmatter validado con Zod en
+  read-time (`lib/projects.ts`, patrón Repository). Añadir un proyecto = crear
+  un `.mdx`; no se toca ningún componente.
+- **SEO:** Metadata API, JSON-LD (`Person` + `CreativeWork`), `sitemap.ts`,
+  `robots.ts` y `opengraph-image.tsx` generados automáticamente.
+- **Tema claro/oscuro** vía `next-themes` + CSS variables (sin FOUC).
+- **Reveal-on-scroll** con Motion, con fallback `<noscript>` que garantiza que
+  el contenido es visible sin JS (protege SEO/LCP).
+
+```
+app/                 Rutas, layouts, metadata (sitemap, robots, og)
+components/
+  ui/                Primitivos shadcn (button, badge, card)
+  sections/          Una sección = un archivo (Server)
+  layout/            Navbar, footer, theme toggle
+  motion/            Reveal (Motion)
+content/projects/    Case studies en MDX (fuente de verdad)
+lib/                 projects (repository), site-config, seo, utils
+types/               Tipos + schema Zod compartidos
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run dev        # desarrollo
+npm run build      # build de producción (SSG)
+npm run start      # servir el build
+npm run lint       # ESLint
+npm run typecheck  # tsc --noEmit
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuración
 
-## Learn More
+Copia `.env.example` a `.env.local` y ajusta `NEXT_PUBLIC_SITE_URL`.
+Edita tus datos (nombre, email, enlaces, stack) en `lib/site-config.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+## Pendientes (placeholders por reemplazar)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Datos reales de proyectos en `content/projects/*.mdx` + capturas en
+  `public/images/projects/`.
+- Foto en `About` (`photo.jpg`) y `public/cv.pdf`.
+- Enlaces reales de GitHub, LinkedIn, Resume y email en `lib/site-config.ts`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Conecta el repo a **Vercel**. Cada `push` a `main` despliega a producción y
+cada PR genera un Preview Deployment. Define `NEXT_PUBLIC_SITE_URL` en las
+variables de entorno del proyecto.
