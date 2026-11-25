@@ -1,6 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import { HeroTicket } from "@/components/sections/hero-ticket";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, whatsappLink } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
@@ -11,7 +11,7 @@ export function Hero() {
     >
       <div>
         <p className="mb-6 text-[15px] text-muted">
-          {siteConfig.location} · Disponible para un puesto junior
+          {siteConfig.location} · Desarrollador web para negocios y equipos
         </p>
 
         <h1 className="mb-6 max-w-[11ch] font-display text-[44px] leading-[1.04] tracking-[-0.02em] sm:text-[60px] lg:text-[68px]">
@@ -19,19 +19,31 @@ export function Hero() {
         </h1>
 
         <p className="mb-10 max-w-[34rem] text-[19px] leading-[30px] text-muted">
-          Menús, catálogos e invitaciones que venden y confirman por WhatsApp, y
-          las plataformas full-stack que hay detrás: React, Python, Go y
-          PostgreSQL.
+          Menús, catálogos, invitaciones y páginas web que tus clientes abren
+          desde su celular. Ellos eligen, y el pedido o la confirmación te llega
+          directo a tu WhatsApp.
         </p>
 
         <div className="flex flex-wrap gap-3">
-          <a href="#work" className={cn(buttonVariants({ variant: "primary" }))}>
-            Ver proyectos
+          <a href="#servicios" className={cn(buttonVariants({ variant: "primary" }))}>
+            Ver ejemplos
           </a>
-          <a href="#contact" className={cn(buttonVariants({ variant: "outline" }))}>
-            Escríbeme
+          <a
+            href={whatsappLink("Hola Jonathan, vi tu portafolio y quiero información para mi negocio.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            Escríbeme por WhatsApp
           </a>
         </div>
+
+        <p className="mt-8 text-[15px] text-muted">
+          ¿Buscas contratar a un desarrollador?{" "}
+          <a href="#work" className="font-medium text-foreground underline decoration-border decoration-2 underline-offset-[5px] transition-colors hover:decoration-accent">
+            Ver proyectos técnicos
+          </a>
+        </p>
       </div>
 
       <HeroTicket />

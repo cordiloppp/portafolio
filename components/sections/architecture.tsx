@@ -9,7 +9,7 @@ export function Architecture() {
       className="mx-auto max-w-[1160px] scroll-mt-16 px-6 py-24 md:px-10"
     >
       <SectionHeading
-        title="Cómo trabajo"
+        title="Cómo construyo"
         description="Pienso en cómo se conectan las piezas antes de escribir la primera pantalla. Así está construido Convite, mi plataforma de invitaciones con confirmación de asistencia."
       />
 

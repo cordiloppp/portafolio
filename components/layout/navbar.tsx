@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
-import { navLinks, siteConfig } from "@/lib/site-config";
+import { navLinks, whatsappLink } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -32,7 +32,7 @@ export function Navbar() {
           href="/#top"
           className="text-[17px] font-semibold tracking-[-0.01em] text-foreground"
         >
-          {siteConfig.shortName}
+          Jonathan Molinero
         </Link>
 
         <div className="flex items-center gap-2 md:gap-6">
@@ -51,23 +51,14 @@ export function Navbar() {
 
           <ThemeToggle />
 
-          {siteConfig.links.cv ? (
-            <a
-              href={siteConfig.links.cv}
-              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-            >
-              Descargar CV
-            </a>
-          ) : (
-            <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-            >
-              GitHub
-            </a>
-          )}
+          <a
+            href={whatsappLink("Hola Jonathan, vi tu portafolio y quiero información para mi negocio.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+          >
+            WhatsApp
+          </a>
         </div>
       </div>
     </nav>

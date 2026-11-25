@@ -11,8 +11,8 @@ export function Work() {
   return (
     <section id="work" className="mx-auto max-w-[1160px] scroll-mt-16 px-6 py-24 md:px-10">
       <SectionHeading
-        title="Proyectos"
-        description="Productos que ofrezco a negocios reales y proyectos para aprender a fondo. Cada uno tiene su caso de estudio: el problema, la decisión técnica y el resultado."
+        title="Proyectos técnicos"
+        description="Para reclutadores y equipos de desarrollo: cada proyecto tiene su caso de estudio con el problema, la decisión técnica y el resultado, además del código en GitHub."
       />
 
       <ul className="flex flex-col gap-8">
