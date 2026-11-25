@@ -7,18 +7,19 @@ import { siteConfig } from "@/lib/site-config";
 
 // Self-hosted variable fonts (from @fontsource-variable) so the build never
 // depends on fetching Google Fonts.
-const spaceGrotesk = localFont({
-  src: "../node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2",
-  variable: "--font-space-grotesk",
+const instrumentSans = localFont({
+  src: "../node_modules/@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2",
+  variable: "--font-instrument-sans",
   display: "swap",
-  weight: "300 700",
+  weight: "400 700",
 });
 
-const ibmPlexSans = localFont({
-  src: "../node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2",
-  variable: "--font-ibm-plex-sans",
+// Display serif: large headlines only.
+const instrumentSerif = localFont({
+  src: "../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2",
+  variable: "--font-instrument-serif",
   display: "swap",
-  weight: "100 700",
+  weight: "400",
 });
 
 const jetBrainsMono = localFont({
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     template: `%s — ${siteConfig.shortName}`,
   },
   description: siteConfig.description,
-  applicationName: `${siteConfig.shortName} · Portfolio`,
+  applicationName: `${siteConfig.shortName} · Portafolio`,
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
   keywords: [
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     url: siteConfig.url,
-    siteName: `${siteConfig.shortName} · Portfolio`,
+    siteName: `${siteConfig.shortName} · Portafolio`,
     title: `${siteConfig.shortName} — ${siteConfig.role}`,
     description: siteConfig.description,
   },
@@ -75,7 +76,7 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${jetBrainsMono.variable} h-full`}
+      className={`${instrumentSans.variable} ${instrumentSerif.variable} ${jetBrainsMono.variable} h-full`}
     >
       <head>
         {/* Without JS, force revealed content visible (protects SEO / no-JS). */}
@@ -86,7 +87,7 @@ export default function RootLayout({
       <body className="min-h-full">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >

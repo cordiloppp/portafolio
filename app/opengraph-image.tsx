@@ -17,31 +17,29 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0B0D10",
+          background: "#F7F4EE",
           padding: "80px",
           fontFamily: "sans-serif",
         }}
       >
         <div
           style={{
-            color: "#3FE0A6",
+            color: "#B4441C",
             fontSize: 28,
-            letterSpacing: 2,
-            textTransform: "uppercase",
           }}
         >
-          Software Developer · Junior / Trainee
+          Disponible para un puesto junior
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div style={{ color: "#E6E8EB", fontSize: 76, fontWeight: 700 }}>
+          <div style={{ color: "#1F1B16", fontSize: 76, fontWeight: 600 }}>
             {siteConfig.shortName}
           </div>
-          <div style={{ color: "#9097A1", fontSize: 36 }}>
-            {`${siteConfig.role}.`}
+          <div style={{ color: "#5E554A", fontSize: 36 }}>
+            Software para los negocios de Tijuana
           </div>
         </div>
-        <div style={{ color: "#9097A1", fontSize: 24 }}>
-          {`Next.js · React · TypeScript · ${siteConfig.location}`}
+        <div style={{ color: "#5E554A", fontSize: 24 }}>
+          {`React · Python · Go · PostgreSQL · ${siteConfig.location}`}
         </div>
       </div>
     ),

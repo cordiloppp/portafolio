@@ -7,12 +7,13 @@ import type { ArchNode, NavLink, StackGroup } from "@/types";
 export const siteConfig = {
   name: "Jonathan Armando Molinero Pérez",
   shortName: "Jonathan Molinero",
-  logo: "<jmp/>",
-  role: "Software Developer enfocado en arquitectura",
-  location: "Tijuana",
+  role: "Desarrollador full-stack",
+  location: "Tijuana, B.C.",
+  studies: "Ingeniería en Software",
+  seeking: "Primer puesto junior o trainee",
   email: "molineroperez9@gmail.com",
   description:
-    "Estudiante de Ingeniería en Software próximo a graduarme. Construyo aplicaciones web full-stack con React, TypeScript, Python y Go, y productos reales para negocios locales. Me interesa el diseño de sistemas y escribir código que otros puedan mantener.",
+    "Desarrollador full-stack en Tijuana. Construyo menús, catálogos e invitaciones que venden y confirman por WhatsApp para negocios locales, y las plataformas con React, Python, Go y PostgreSQL que hay detrás.",
   // Set NEXT_PUBLIC_SITE_URL in Vercel to your production domain.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://portafolio.vercel.app",
   // Leave a link as "" to hide it on the site.
@@ -25,33 +26,22 @@ export const siteConfig = {
 } as const;
 
 export const navLinks: NavLink[] = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Stack", href: "#stack" },
-  { label: "Contact", href: "#contact" },
-];
-
-export const heroStack: string[] = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Python",
-  "FastAPI",
-  "Go",
-  "PostgreSQL",
-  "Docker",
+  { label: "Proyectos", href: "#work" },
+  { label: "Cómo trabajo", href: "#architecture" },
+  { label: "Sobre mí", href: "#about" },
+  { label: "Contacto", href: "#contact" },
 ];
 
 export const stackGroups: StackGroup[] = [
   { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind", "Vite"] },
   { label: "Backend", items: ["Python · FastAPI", "Go", "Node.js", "Convex", "Prisma"] },
-  { label: "Data", items: ["PostgreSQL", "SQLAlchemy", "sqlc", "MongoDB"] },
-  { label: "Tooling", items: ["Git", "GitHub", "Docker", "Vercel", "Pytest", "Playwright"] },
+  { label: "Datos", items: ["PostgreSQL", "SQLAlchemy", "sqlc", "MongoDB"] },
+  { label: "Herramientas", items: ["Git", "GitHub", "Docker", "Vercel", "Pytest", "Playwright"] },
 ];
 
 export const archNodes: ArchNode[] = [
-  { layer: "Client", name: "React", tech: "TypeScript + Vite", arrow: true },
+  { layer: "Cliente", name: "React", tech: "TypeScript + Vite", arrow: true },
   { layer: "API", name: "FastAPI", tech: "REST + JWT", arrow: true },
-  { layer: "Domain", name: "Services", tech: "Reglas de negocio", arrow: true },
-  { layer: "Data", name: "PostgreSQL", tech: "SQLAlchemy + Alembic", arrow: false },
+  { layer: "Dominio", name: "Servicios", tech: "Reglas de negocio", arrow: true },
+  { layer: "Datos", name: "PostgreSQL", tech: "SQLAlchemy + Alembic", arrow: false },
 ];

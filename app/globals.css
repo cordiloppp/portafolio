@@ -4,33 +4,34 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ------------------------------------------------------------------ */
-/* Design tokens — imported from Portfolio.dc.html                    */
-/* Light is the :root default; .dark overrides. next-themes adds .dark */
+/* Direction: the counter of a local business. Paper, ink, terracotta. */
+/* Light (paper) is the default; .dark is the same counter after hours. */
 /* ------------------------------------------------------------------ */
 :root {
-  --background: #fafaf8;
-  --surface: #ffffff;
-  --surface-2: #f2f2ee;
-  --border: #e2e2dc;
-  --foreground: #16181d;
-  --muted: #6b7280;
-  /* Accent darkened for AA contrast on light backgrounds (mint fails on light) */
-  --accent: #0a8f63;
+  --background: #f7f4ee; /* paper */
+  --surface: #fdfbf7; /* card */
+  --surface-2: #efe9df; /* raised */
+  --border: rgba(31, 27, 22, 0.1); /* hairline */
+  --foreground: #1f1b16; /* ink */
+  --muted: #5e554a; /* secondary text */
+  --faint: #756c60; /* meta and captions */
+  --accent: #b4441c; /* terracotta, 5.3:1 on paper */
   --accent-foreground: #ffffff;
-  --accent-dim: rgba(10, 143, 99, 0.1);
+  --ticket: #fffdf8;
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: #0b0d10;
-  --surface: #14171c;
-  --surface-2: #171b21;
-  --border: #23272e;
-  --foreground: #e6e8eb;
-  --muted: #9097a1;
-  --accent: #3fe0a6;
-  --accent-foreground: #0b0d10;
-  --accent-dim: rgba(63, 224, 166, 0.12);
+  --background: #161513;
+  --surface: #1c1a18;
+  --surface-2: #262421;
+  --border: rgba(239, 233, 222, 0.09);
+  --foreground: #efe9de;
+  --muted: #aaa398;
+  --faint: #8a847a;
+  --accent: #e2794d;
+  --accent-foreground: #161513;
+  --ticket: #f3eee4;
 }
 
 @theme inline {
@@ -40,18 +41,16 @@
   --color-border: var(--border);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-accent-dim: var(--accent-dim);
+  --color-ticket: var(--ticket);
 
-  --font-sans: var(--font-ibm-plex-sans);
-  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-instrument-sans);
+  --font-display: var(--font-instrument-serif);
   --font-mono: var(--font-jetbrains-mono);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -82,25 +81,111 @@ body {
   border-radius: 4px;
 }
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+/* Signature: receipt lines with dot leaders, "React ········ frontend". */
+.leader {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.leader > .leader-fill {
+  flex: 1;
+  min-width: 16px;
+  border-bottom: 1.5px dotted currentColor;
+  opacity: 0.35;
+  transform: translateY(-4px);
 }
 
-.status-dot {
-  animation: blink 2s infinite;
+/* Torn bottom edge of the hero ticket */
+.ticket-edge {
+  height: 12px;
+  background:
+    linear-gradient(-45deg, transparent 6px, var(--ticket) 0) 0 0 / 12px 12px repeat-x,
+    linear-gradient(45deg, transparent 6px, var(--ticket) 0) 0 0 / 12px 12px repeat-x;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .status-dot {
-    animation: none;
-  }
+}
+
+/* Case study body (MDX) */
+.prose-portfolio {
+  font-size: 17px;
+  line-height: 28px;
+  color: var(--muted);
+}
+.prose-portfolio > * + * {
+  margin-top: 20px;
+}
+.prose-portfolio h2 {
+  margin-top: 48px;
+  font-family: var(--font-instrument-serif), serif;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+.prose-portfolio h3 {
+  margin-top: 32px;
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--foreground);
+}
+.prose-portfolio strong {
+  font-weight: 600;
+  color: var(--foreground);
+}
+.prose-portfolio a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+.prose-portfolio a:hover {
+  text-decoration-color: var(--accent);
+}
+.prose-portfolio ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+.prose-portfolio li + li {
+  margin-top: 8px;
+}
+.prose-portfolio li::marker {
+  color: var(--faint);
+}
+.prose-portfolio code {
+  white-space: nowrap;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--foreground);
+}
+.prose-portfolio blockquote {
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 15px;
+  line-height: 24px;
+}
+.prose-portfolio table {
+  width: 100%;
+  font-size: 15px;
+  border-collapse: collapse;
+}
+.prose-portfolio th,
+.prose-portfolio td {
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+.prose-portfolio th {
+  font-weight: 500;
+  color: var(--foreground);
 }

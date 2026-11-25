@@ -1,39 +1,32 @@
+import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
+import { cn } from "@/lib/utils";
 
 export function Contact() {
   return (
-    <section
-      id="contact"
-      className="mx-auto max-w-[1160px] px-6 pb-16 pt-24 md:px-10"
-    >
-      <div className="rounded-[20px] border border-border bg-surface px-6 py-16 text-center md:px-12">
-        <div className="mb-5 font-mono text-[13px] uppercase tracking-wider text-accent">
-          05 / Contact
-        </div>
-        <h2 className="mb-5 font-display text-[clamp(2rem,5vw,3.25rem)] font-semibold tracking-[-0.03em]">
-          Hablemos.
+    <section id="contact" className="mx-auto max-w-[1160px] scroll-mt-16 px-6 pb-16 pt-24 md:px-10">
+      <div className="rounded-2xl border border-border bg-surface px-6 py-16 md:px-16">
+        <h2 className="mb-4 font-display text-[40px] leading-[1.05] tracking-[-0.02em] sm:text-[56px]">
+          Hablemos
         </h2>
-        <p className="mx-auto mb-9 max-w-[480px] text-[18px] leading-relaxed text-muted">
-          Buscando mi primera posición como Junior / Trainee. Si crees que
-          encajo en tu equipo, escríbeme.
+        <p className="mb-8 max-w-[480px] text-[17px] leading-[28px] text-muted">
+          Busco mi primer puesto como desarrollador junior o trainee. Si crees
+          que encajo en tu equipo, o tienes un negocio que necesita su menú o
+          catálogo en línea, escríbeme.
         </p>
 
-        <a
-          href={`mailto:${siteConfig.email}`}
-          className="inline-block rounded-xl bg-accent px-8 py-4 font-mono text-base font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
-        >
-          {siteConfig.email}
-        </a>
-
-        <div className="mt-9 flex justify-center gap-6 font-mono text-sm">
+        <div className="flex flex-wrap items-center gap-3">
+          <a href={`mailto:${siteConfig.email}`} className={cn(buttonVariants({ variant: "primary" }))}>
+            {siteConfig.email}
+          </a>
           {siteConfig.links.github ? (
             <a
               href={siteConfig.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted transition-colors hover:text-accent"
+              className={cn(buttonVariants({ variant: "outline" }))}
             >
-              GitHub ↗
+              GitHub
             </a>
           ) : null}
           {siteConfig.links.linkedin ? (
@@ -41,9 +34,9 @@ export function Contact() {
               href={siteConfig.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted transition-colors hover:text-accent"
+              className={cn(buttonVariants({ variant: "outline" }))}
             >
-              LinkedIn ↗
+              LinkedIn
             </a>
           ) : null}
         </div>

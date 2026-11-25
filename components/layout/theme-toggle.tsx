@@ -18,13 +18,13 @@ export function ThemeToggle() {
       type="button"
       aria-label="Cambiar tema"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="flex size-[34px] items-center justify-center rounded-lg border border-border bg-surface text-foreground transition-colors hover:border-accent"
+      className="flex size-9 items-center justify-center rounded-[10px] text-muted transition-colors hover:bg-surface-2 hover:text-foreground"
     >
       {mounted ? (
         isDark ? (
-          <Sun className="size-4" aria-hidden />
+          <Sun className="size-[18px]" strokeWidth={1.5} aria-hidden />
         ) : (
-          <Moon className="size-4" aria-hidden />
+          <Moon className="size-[18px]" strokeWidth={1.5} aria-hidden />
         )
       ) : (
         <span className="size-4" />

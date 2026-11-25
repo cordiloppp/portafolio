@@ -4,7 +4,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
-import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { getProjectBySlug, getProjectSlugs } from "@/lib/projects";
@@ -46,37 +47,35 @@ export default async function ProjectPage({
         }}
       />
       <Navbar />
-      <main className="mx-auto max-w-[760px] px-6 pb-20 pt-40 md:px-10">
+      <main className="mx-auto max-w-[760px] px-6 pb-20 pt-32 md:px-10">
         <Link
           href="/#work"
-          className="font-mono text-[13px] text-muted transition-colors hover:text-accent"
+          className="text-[15px] text-muted transition-colors hover:text-foreground"
         >
           ← Volver a proyectos
         </Link>
 
-        <header className="mt-8 mb-12 border-b border-border pb-10">
-          <span className="font-mono text-[13px] text-accent">
+        <header className="mb-12 mt-8 border-b border-border pb-10">
+          <span className="font-mono text-[13px] tabular-nums text-faint">
             {project.num}
           </span>
-          <h1 className="mb-5 mt-2 font-display text-[clamp(2rem,5vw,3rem)] font-semibold tracking-[-0.02em]">
+          <h1 className="mb-5 mt-2 font-display text-[40px] leading-[1.08] tracking-[-0.02em] sm:text-[52px]">
             {project.title}
           </h1>
-          <p className="mb-6 text-[18px] leading-relaxed text-muted">
+          <p className="mb-6 text-[19px] leading-[30px] text-muted">
             {project.problem}
           </p>
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
-            ))}
-          </div>
+          <p className="font-mono text-[12px] leading-5 text-faint">
+            {project.tags.join(" · ")}
+          </p>
           {project.liveUrl || project.repoUrl ? (
-            <div className="mt-6 flex gap-[18px] font-mono text-[13px]">
+            <div className="mt-6 flex flex-wrap gap-3">
               {project.liveUrl ? (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent transition-opacity hover:opacity-80"
+                  className={cn(buttonVariants({ variant: "primary", size: "sm" }))}
                 >
                   Ver demo en vivo ↗
                 </a>
@@ -86,7 +85,7 @@ export default async function ProjectPage({
                   href={project.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground transition-opacity hover:opacity-80"
+                  className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
                 >
                   Código en GitHub ↗
                 </a>
@@ -108,7 +107,7 @@ export default async function ProjectPage({
           </div>
         ) : null}
 
-        <article className="prose-portfolio flex flex-col gap-5 text-[17px] leading-[1.7] text-muted">
+        <article className="prose-portfolio">
           <MDXRemote source={project.body} />
         </article>
       </main>

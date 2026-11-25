@@ -12,7 +12,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -21,52 +21,54 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b px-6 py-[18px] transition-all duration-300 md:px-10",
+        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200",
         scrolled
-          ? "border-border bg-background/75 backdrop-blur-md"
-          : "border-transparent bg-transparent",
+          ? "border-border bg-background/90 backdrop-blur-sm"
+          : "border-transparent bg-background",
       )}
     >
-      <Link
-        href="#top"
-        className="font-mono text-[15px] font-semibold tracking-tight text-foreground"
-      >
-        {siteConfig.logo}
-      </Link>
+      <div className="mx-auto flex h-16 max-w-[1160px] items-center justify-between gap-6 px-6 md:px-10">
+        <Link
+          href="/#top"
+          className="text-[17px] font-semibold tracking-[-0.01em] text-foreground"
+        >
+          {siteConfig.shortName}
+        </Link>
 
-      <div className="flex items-center gap-5 md:gap-7">
-        <ul className="hidden items-center gap-7 sm:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="font-mono text-[13px] text-muted transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="flex items-center gap-2 md:gap-6">
+          <ul className="hidden items-center gap-6 md:flex">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={`/${link.href}`}
+                  className="text-[15px] text-muted transition-colors hover:text-foreground"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        <ThemeToggle />
+          <ThemeToggle />
 
-        {siteConfig.links.cv ? (
-          <a
-            href={siteConfig.links.cv}
-            className={cn(buttonVariants({ variant: "primary", size: "sm" }))}
-          >
-            CV ↓
-          </a>
-        ) : (
-          <a
-            href={siteConfig.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(buttonVariants({ variant: "primary", size: "sm" }))}
-          >
-            GitHub ↗
-          </a>
-        )}
+          {siteConfig.links.cv ? (
+            <a
+              href={siteConfig.links.cv}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+            >
+              Descargar CV
+            </a>
+          ) : (
+            <a
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+            >
+              GitHub
+            </a>
+          )}
+        </div>
       </div>
     </nav>
   );

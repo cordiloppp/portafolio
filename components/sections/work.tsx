@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/sections/section-heading";
 import { getFeaturedProjects } from "@/lib/projects";
@@ -10,58 +9,59 @@ export function Work() {
   const projects = getFeaturedProjects();
 
   return (
-    <section id="work" className="mx-auto max-w-[1160px] px-6 py-20 md:px-10">
+    <section id="work" className="mx-auto max-w-[1160px] scroll-mt-16 px-6 py-24 md:px-10">
       <SectionHeading
-        eyebrow="01 / Selected Work"
-        title="Proyectos seleccionados"
-        description="Cada proyecto se presenta como caso de estudio: el problema, la decisión técnica y el resultado."
+        title="Proyectos"
+        description="Productos que ofrezco a negocios reales y proyectos para aprender a fondo. Cada uno tiene su caso de estudio: el problema, la decisión técnica y el resultado."
       />
 
-      <ul className="flex flex-col gap-7">
+      <ul className="flex flex-col gap-8">
         {projects.map((project, index) => (
-          <Reveal as="li" key={project.slug} delay={index * 0.05}>
-            <article className="group rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent">
-              <div className="grid min-h-[300px] grid-cols-1 md:grid-cols-[1.15fr_1fr]">
-                <div className="flex flex-col p-8 md:p-10">
-                  <div className="mb-6 flex items-center gap-3.5">
-                    <span className="font-mono text-[13px] text-accent">
+          <Reveal as="li" key={project.slug} delay={Math.min(index, 3) * 0.05}>
+            <article className="group overflow-hidden rounded-2xl border border-border bg-surface transition-colors duration-200 hover:border-foreground/20">
+              <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr]">
+                <div className="flex flex-col p-6 sm:p-8">
+                  <div className="mb-6 flex items-baseline gap-3">
+                    <span className="font-mono text-[13px] tabular-nums text-faint">
                       {project.num}
                     </span>
-                    <h3 className="font-display text-[26px] font-semibold tracking-[-0.01em]">
-                      {project.title}
+                    <h3 className="text-[24px] font-medium leading-tight tracking-[-0.01em]">
+                      <Link href={`/projects/${project.slug}`} className="transition-colors hover:text-accent">
+                        {project.title}
+                      </Link>
                     </h3>
                   </div>
 
-                  <div className="flex flex-1 flex-col gap-[18px]">
-                    <Field label="El problema" tone="foreground">
-                      {project.problem}
-                    </Field>
-                    <Field label="Mi enfoque" tone="muted">
-                      {project.approach}
-                    </Field>
-                  </div>
+                  <dl className="flex flex-1 flex-col gap-4">
+                    <div>
+                      <dt className="mb-1 text-[13px] text-faint">El problema</dt>
+                      <dd className="text-[15px] leading-6 text-foreground">{project.problem}</dd>
+                    </div>
+                    <div>
+                      <dt className="mb-1 text-[13px] text-faint">Mi enfoque</dt>
+                      <dd className="text-[15px] leading-6 text-muted">{project.approach}</dd>
+                    </div>
+                  </dl>
 
-                  <div className="mt-7 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag}>{tag}</Badge>
-                    ))}
-                  </div>
+                  <p className="mt-6 font-mono text-[12px] leading-5 text-faint">
+                    {project.tags.join(" · ")}
+                  </p>
 
-                  <div className="mt-6 flex gap-[18px] font-mono text-[13px]">
+                  <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[15px] font-medium">
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="text-accent transition-opacity hover:opacity-80"
+                      className="text-foreground underline decoration-border decoration-2 underline-offset-[6px] transition-colors hover:decoration-accent"
                     >
-                      Caso de estudio →
+                      Caso de estudio
                     </Link>
                     {project.liveUrl ? (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-foreground transition-opacity hover:opacity-80"
+                        className="text-muted transition-colors hover:text-foreground"
                       >
-                        Demo ↗
+                        Ver demo ↗
                       </a>
                     ) : null}
                     {project.repoUrl ? (
@@ -69,40 +69,33 @@ export function Work() {
                         href={project.repoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-foreground transition-opacity hover:opacity-80"
+                        className="text-muted transition-colors hover:text-foreground"
                       >
-                        Code ↗
+                        Código ↗
                       </a>
                     ) : null}
                   </div>
                 </div>
 
-                <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-b-2xl border-t md:aspect-auto md:rounded-b-none md:rounded-r-2xl border-border bg-surface-2 md:border-l md:border-t-0">
+                <div className="relative aspect-[16/10] border-t border-border bg-surface-2 md:aspect-auto md:border-l md:border-t-0">
                   {project.cover ? (
                     <Image
                       src={project.cover}
                       alt={`Captura de ${project.title}`}
                       fill
                       sizes="(min-width: 768px) 520px, 100vw"
-                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="object-cover object-left-top"
                     />
                   ) : (
-                    <>
-                      <div
-                        aria-hidden
-                        className="absolute inset-0 opacity-50 [background-image:radial-gradient(var(--border)_1px,transparent_1px)] [background-size:22px_22px]"
-                      />
-                      <div className="relative flex max-w-[80%] flex-wrap justify-center gap-2 p-8">
-                        {project.tags.slice(0, 4).map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-lg border border-border bg-surface px-3 py-2 font-mono text-[13px] text-muted"
-                          >
+                    <div className="absolute inset-0 flex items-center justify-center p-8">
+                      <div className="w-full max-w-[280px] rounded-[10px] border border-border bg-surface p-4 font-mono text-[12px] leading-6 text-muted">
+                        {project.tags.slice(0, 5).map((tag) => (
+                          <div key={tag} className="text-foreground">
                             {tag}
-                          </span>
+                          </div>
                         ))}
                       </div>
-                    </>
+                    </div>
                   )}
                 </div>
               </div>
@@ -111,32 +104,5 @@ export function Work() {
         ))}
       </ul>
     </section>
-  );
-}
-
-function Field({
-  label,
-  tone,
-  children,
-}: {
-  label: string;
-  tone: "foreground" | "muted";
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <div className="mb-1.5 font-mono text-[11px] uppercase tracking-wide text-muted">
-        {label}
-      </div>
-      <div
-        className={
-          tone === "foreground"
-            ? "text-[15px] leading-relaxed text-foreground"
-            : "text-[15px] leading-relaxed text-muted"
-        }
-      >
-        {children}
-      </div>
-    </div>
   );
 }
