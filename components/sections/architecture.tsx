@@ -11,7 +11,7 @@ export function Architecture() {
       <SectionHeading
         eyebrow="02 / How I Think"
         title="Diseño de sistemas"
-        description="No solo construyo features — pienso en cómo se conectan las piezas. Ejemplo de la arquitectura que aplico en mis proyectos full-stack."
+        description="No solo construyo features — pienso en cómo se conectan las piezas. Así está construido Convite, mi plataforma de invitaciones con RSVP."
       />
 
       <Reveal className="rounded-2xl border border-border bg-surface px-6 py-12 md:px-8">
@@ -44,9 +44,9 @@ export function Architecture() {
         </ol>
 
         <p className="mx-auto mt-8 max-w-[640px] text-center text-sm leading-relaxed text-muted">
-          Separo la lógica de dominio del acceso a datos: la UI nunca habla
-          directo con la base. Prisma actúa como capa de repositorio, lo que
-          mantiene el código testeable y fácil de mantener.
+          La UI nunca habla directo con la base. Las reglas de negocio viven en
+          una capa de servicios y se refuerzan en PostgreSQL con restricciones
+          CHECK, así que una regla no depende de que la pantalla la respete.
         </p>
       </Reveal>
     </section>

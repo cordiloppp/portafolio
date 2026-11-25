@@ -1,0 +1,55 @@
+---
+title: "Convite · Invitaciones con RSVP"
+num: "01"
+problem: "Los organizadores de eventos confirman asistencia por WhatsApp, uno por uno, y llevan la cuenta en hojas de cálculo que nunca cuadran."
+approach: "API en FastAPI con reglas de negocio validadas en el backend y en PostgreSQL (CHECK constraints), panel en React que se actualiza solo, y links personalizados por familia sin necesidad de login."
+tags: ["React", "TypeScript", "FastAPI", "PostgreSQL", "Docker", "Pytest", "Playwright"]
+featured: true
+order: 1
+repoUrl: "https://github.com/cordiloppp/convite-rsvp"
+cover: "/images/projects/convite.webp"
+---
+
+## El problema
+
+En bodas y XV años, el organizador manda la invitación y luego persigue a cada
+familia para saber cuántos van a ir. Las respuestas llegan por WhatsApp, se
+anotan a mano y el conteo final casi nunca coincide con la realidad.
+
+## Mi enfoque
+
+Convite separa dos experiencias:
+
+- **Planner:** inicia sesión, crea eventos, importa invitados desde CSV, sigue
+  las confirmaciones en tiempo casi real y exporta todo a Excel.
+- **Invitado:** no crea cuenta. Abre su link personalizado (token generado con
+  `secrets.token_urlsafe`), ve la invitación y responde cuántos lugares usará.
+
+Decisiones técnicas clave:
+
+- **Las reglas viven en el backend, no en la pantalla.** `lugares_confirmados`
+  nunca supera `lugares_asignados`: se valida en la API _y_ con un `CHECK` en
+  PostgreSQL. La fecha límite también se aplica en el servidor.
+- **Aislamiento entre planners:** un planner solo ve sus eventos; un recurso
+  ajeno responde 404 para no revelar que existe.
+- **Arquitectura por capas:** `routers` → `services` (RSVP, resumen, CSV, Excel)
+  → `models` con SQLAlchemy 2 y migraciones con Alembic.
+- **Importación tolerante:** el CSV acepta coma o punto y coma, UTF-8 o
+  Windows-1252 (Excel), importa las filas válidas y reporta las inválidas.
+- **Exportación segura:** los textos se guardan como texto en Excel para evitar
+  inyección de fórmulas.
+
+## Calidad
+
+- Pruebas con **pytest** sobre una base de datos de prueba que se crea y destruye
+  sola con las mismas migraciones: RSVP, límites de lugares, fecha límite,
+  acceso entre planners, importación y exportación.
+- Prueba de punta a punta en navegador con **Playwright**.
+- Todo el entorno (PostgreSQL, API y frontend) se levanta con un solo
+  `docker compose up --build`, con datos de ejemplo precargados.
+
+## Resultado
+
+Una plataforma lista para demostrar a planners de eventos: el resumen de
+lugares (confirmados, no asistirán, pendientes) siempre suma el total asignado,
+y el panel se actualiza solo cuando alguien responde.

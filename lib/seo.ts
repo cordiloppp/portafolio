@@ -16,8 +16,8 @@ export function personJsonLd() {
       "@type": "PostalAddress",
       addressCountry: "GT",
     },
-    sameAs: [siteConfig.links.github, siteConfig.links.linkedin].filter(
-      (link) => link && link !== "#",
+    sameAs: [siteConfig.links.github, siteConfig.links.linkedin as string].filter(
+      Boolean,
     ),
   };
 }

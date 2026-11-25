@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
@@ -13,15 +14,7 @@ export function Work() {
       <SectionHeading
         eyebrow="01 / Selected Work"
         title="Proyectos seleccionados"
-        description={
-          <>
-            Cada proyecto se presenta como caso de estudio: el problema, la
-            decisión técnica y el resultado.{" "}
-            <span className="text-foreground">
-              Placeholder — los añadiré pronto.
-            </span>
-          </>
-        }
+        description="Cada proyecto se presenta como caso de estudio: el problema, la decisión técnica y el resultado."
       />
 
       <ul className="flex flex-col gap-7">
@@ -61,9 +54,21 @@ export function Work() {
                     >
                       Caso de estudio →
                     </Link>
+                    {project.liveUrl ? (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground transition-opacity hover:opacity-80"
+                      >
+                        Demo ↗
+                      </a>
+                    ) : null}
                     {project.repoUrl ? (
                       <a
                         href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-foreground transition-opacity hover:opacity-80"
                       >
                         Code ↗
@@ -72,14 +77,33 @@ export function Work() {
                   </div>
                 </div>
 
-                <div className="relative flex items-center justify-center border-t border-border bg-surface-2 md:border-l md:border-t-0">
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 opacity-50 [background-image:radial-gradient(var(--border)_1px,transparent_1px)] [background-size:22px_22px]"
-                  />
-                  <span className="relative rounded-lg border border-dashed border-border px-[18px] py-2.5 font-mono text-[13px] text-muted">
-                    project_preview.png
-                  </span>
+                <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-b-2xl border-t md:aspect-auto md:rounded-b-none md:rounded-r-2xl border-border bg-surface-2 md:border-l md:border-t-0">
+                  {project.cover ? (
+                    <Image
+                      src={project.cover}
+                      alt={`Captura de ${project.title}`}
+                      fill
+                      sizes="(min-width: 768px) 520px, 100vw"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <>
+                      <div
+                        aria-hidden
+                        className="absolute inset-0 opacity-50 [background-image:radial-gradient(var(--border)_1px,transparent_1px)] [background-size:22px_22px]"
+                      />
+                      <div className="relative flex max-w-[80%] flex-wrap justify-center gap-2 p-8">
+                        {project.tags.slice(0, 4).map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-lg border border-border bg-surface px-3 py-2 font-mono text-[13px] text-muted"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </article>

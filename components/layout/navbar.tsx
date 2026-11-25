@@ -50,12 +50,23 @@ export function Navbar() {
 
         <ThemeToggle />
 
-        <a
-          href={siteConfig.links.resume}
-          className={cn(buttonVariants({ variant: "primary", size: "sm" }))}
-        >
-          Resume ↗
-        </a>
+        {siteConfig.links.cv ? (
+          <a
+            href={siteConfig.links.cv}
+            className={cn(buttonVariants({ variant: "primary", size: "sm" }))}
+          >
+            CV ↓
+          </a>
+        ) : (
+          <a
+            href={siteConfig.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(buttonVariants({ variant: "primary", size: "sm" }))}
+          >
+            GitHub ↗
+          </a>
+        )}
       </div>
     </nav>
   );

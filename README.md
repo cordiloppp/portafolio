@@ -1,5 +1,7 @@
 # Portafolio — Jonathan Molinero
 
+**En vivo:** https://portafolio-inky-theta-84.vercel.app
+
 Portafolio profesional construido con un enfoque **SSG-first**: contenido en
 archivos, interactividad en islas, todo prerenderizado en build.
 
@@ -48,12 +50,10 @@ npm run typecheck  # tsc --noEmit
 Copia `.env.example` a `.env.local` y ajusta `NEXT_PUBLIC_SITE_URL`.
 Edita tus datos (nombre, email, enlaces, stack) en `lib/site-config.ts`.
 
-## Pendientes (placeholders por reemplazar)
+## Pendientes
 
-- Datos reales de proyectos en `content/projects/*.mdx` + capturas en
-  `public/images/projects/`.
-- Foto en `About` (`photo.jpg`) y `public/cv.pdf`.
-- Enlaces reales de GitHub, LinkedIn, Resume y email en `lib/site-config.ts`.
+- Foto en `About` (hoy muestra un monograma) y `public/cv.pdf` (pon `links.cv: "/cv.pdf"` para mostrar el botón).
+- Email de contacto y LinkedIn en `lib/site-config.ts` (un enlace vacío `""` se oculta).
 
 ## Deploy
 

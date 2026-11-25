@@ -26,18 +26,26 @@ export function Contact() {
         </a>
 
         <div className="mt-9 flex justify-center gap-6 font-mono text-sm">
-          <a
-            href={siteConfig.links.github}
-            className="text-muted transition-colors hover:text-accent"
-          >
-            GitHub ↗
-          </a>
-          <a
-            href={siteConfig.links.linkedin}
-            className="text-muted transition-colors hover:text-accent"
-          >
-            LinkedIn ↗
-          </a>
+          {siteConfig.links.github ? (
+            <a
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted transition-colors hover:text-accent"
+            >
+              GitHub ↗
+            </a>
+          ) : null}
+          {siteConfig.links.linkedin ? (
+            <a
+              href={siteConfig.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted transition-colors hover:text-accent"
+            >
+              LinkedIn ↗
+            </a>
+          ) : null}
         </div>
       </div>
     </section>

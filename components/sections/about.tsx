@@ -9,8 +9,9 @@ export function About() {
             aria-hidden
             className="absolute inset-0 opacity-50 [background-image:radial-gradient(var(--border)_1px,transparent_1px)] [background-size:22px_22px]"
           />
-          <span className="relative rounded-lg border border-dashed border-border px-[18px] py-2.5 font-mono text-[13px] text-muted">
-            photo.jpg
+          {/* Replace with <Image src="/photo.jpg" ... /> when you add a photo. */}
+          <span className="relative font-display text-[clamp(4rem,12vw,7rem)] font-semibold tracking-[-0.04em] text-accent">
+            JM
           </span>
         </Reveal>
 

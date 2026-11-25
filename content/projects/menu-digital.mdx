@@ -1,0 +1,46 @@
+---
+title: "Menú Digital para restaurantes"
+num: "02"
+problem: "Las taquerías y loncherías reciben pedidos por WhatsApp con mensajes confusos y mandan su menú como fotos borrosas o PDF."
+approach: "Una sola base de código que genera un sitio estático por restaurante a partir de un JSON, con scripts para fotos, colores, QR y publicación en Vercel."
+tags: ["React", "TypeScript", "Tailwind", "Vite", "Node.js", "Vercel"]
+featured: true
+order: 2
+liveUrl: "https://menu-tacos-el-guero.vercel.app"
+repoUrl: "https://github.com/cordiloppp/menu-digital"
+cover: "/images/projects/menu.webp"
+---
+
+## El problema
+
+Los restaurantes pequeños de mi zona venden por WhatsApp, pero su menú vive en
+fotos de una pizarra o en un PDF que no se lee en el celular. Los pedidos llegan
+incompletos y hay que preguntar dos o tres veces qué quería el cliente.
+
+## Mi enfoque
+
+En lugar de hacer un sitio por cliente, construí una **fábrica de menús**:
+
+- Cada restaurante es una carpeta `clients/<slug>/` con un `restaurant.json`
+  que contiene todo el negocio: platillos, precios, horario, promociones.
+- El build elige el cliente y genera un sitio **100% estático**: sin servidor,
+  sin base de datos y gratis de hospedar.
+- El carrito arma el pedido y lo abre en WhatsApp **ya escrito**, con
+  cantidades, notas y total.
+
+Automaticé el trabajo repetitivo con scripts en Node/TypeScript:
+
+| Comando | Qué resuelve |
+|---|---|
+| `new-client` | Crea un restaurante en modo demo con logo de iniciales y portada |
+| `fotos` | Convierte fotos a WebP y **extrae la paleta de colores del logo** |
+| `validar` | Revisa el JSON con mensajes claros en español |
+| `deploy` | Compila y publica en Vercel, e imprime la URL |
+| `qr` | Genera el QR para las mesas (PNG y SVG) |
+| `promote` | Cuando el restaurante compra, pasa de demo a producción |
+
+## Resultado
+
+Pasar de "tengo un restaurante interesado" a "aquí está tu demo en vivo" toma
+minutos. El modo demo muestra una franja de vista previa con botón de compra;
+el modo cliente se publica limpio e indexable.

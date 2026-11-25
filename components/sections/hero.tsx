@@ -28,12 +28,23 @@ export function Hero() {
         <a href="#work" className={cn(buttonVariants({ variant: "primary" }))}>
           Ver proyectos
         </a>
-        <a
-          href={siteConfig.links.cv}
-          className={cn(buttonVariants({ variant: "outline" }))}
-        >
-          Descargar CV ↓
-        </a>
+        {siteConfig.links.cv ? (
+          <a
+            href={siteConfig.links.cv}
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            Descargar CV ↓
+          </a>
+        ) : (
+          <a
+            href={siteConfig.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            GitHub ↗
+          </a>
+        )}
       </div>
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5 font-mono text-[13px] text-muted">

@@ -1,0 +1,30 @@
+---
+title: "Chatbot para WhatsApp"
+num: "07"
+problem: "Los negocios pequeños responden a mano las mismas preguntas y agendan citas por WhatsApp, mensaje por mensaje."
+approach: "Bot en Node.js con Baileys y una máquina de estados por usuario: menús numerados y flujos predefinidos, sin depender de IA ni de la API oficial."
+tags: ["Node.js", "JavaScript", "Baileys", "Máquina de estados"]
+featured: false
+order: 7
+repoUrl: "https://github.com/cordiloppp/chatbot-whatsapp"
+---
+
+## El problema
+
+Muchos negocios pasan horas contestando "¿qué horarios tienen?" o "quiero una
+cita". Un bot sencillo y predecible resuelve la mayoría de esas conversaciones.
+
+## Mi enfoque
+
+- Conexión a WhatsApp con **Baileys** (escaneando un QR) y reconexión
+  automática.
+- **Máquina de estados** (`flowRouter`) que enruta cada mensaje según el estado
+  de la conversación; el estado de cada usuario vive en un `Map` en memoria, así
+  que varias conversaciones simultáneas no se mezclan.
+- Arquitectura modular: `handlers`, `services`, `flows` y `utils`.
+- Configuración con variables de entorno y logs con Pino.
+
+## Resultado
+
+Un flujo completo de menú principal y agenda de citas, fácil de extender
+agregando nuevos flujos.

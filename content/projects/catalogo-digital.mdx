@@ -1,0 +1,45 @@
+---
+title: "Catálogo Digital para tiendas"
+num: "03"
+problem: "Las tiendas pequeñas (repostería, ropa, flores) venden por Instagram y WhatsApp sin catálogo: cada cliente pregunta precios, tallas y sabores uno por uno."
+approach: "Catálogo estático con carrito y variantes de producto, datos validados con un esquema zod y colores ajustados automáticamente a contraste WCAG AA."
+tags: ["React", "TypeScript", "Tailwind", "zod", "Vite", "Vercel"]
+featured: true
+order: 3
+liveUrl: "https://dulce-alba-demo.vercel.app"
+repoUrl: "https://github.com/cordiloppp/catalogo-digital"
+cover: "/images/projects/catalogo.webp"
+---
+
+## El problema
+
+Una repostería recibe la misma pregunta veinte veces al día: "¿cuánto cuesta el
+pastel de 20 personas de moka?". Sin catálogo, cada venta empieza con una
+conversación larga y muchas se pierden en el camino.
+
+## Mi enfoque
+
+Partí de la arquitectura de mi [Menú Digital](/projects/menu-digital) y la
+adapté a productos con más variantes:
+
+- **Variantes con precio propio o costo extra:** tamaño, sabor, talla o color,
+  con opciones agotadas y muestras de color.
+- **Productos sobre pedido (`cotizar`):** muestran "Desde $X", piden una foto de
+  referencia y el mensaje dice "total estimado".
+- **Entrega configurable:** recoger en tienda, domicilio (con envío gratis desde
+  cierto monto) o punto de encuentro; fecha mínima de anticipación para pasteles.
+- **Esquema zod** como contrato del `catalog.json`: el build falla con mensajes
+  en español antes de publicar algo roto. Solo se importan _tipos_ del esquema
+  en el frontend, para que zod no aumente el tamaño del bundle.
+- **Accesibilidad automática:** los colores de la marca se ajustan al compilar
+  para cumplir contraste WCAG AA.
+- **Importación desde Excel/CSV:** la hoja que manda el cliente se convierte en
+  productos; las filas con precios ilegibles se omiten y se reportan.
+
+La lógica del pedido (`src/lib/pedido.ts`) está separada de React, así que se
+puede probar y reutilizar sin la interfaz.
+
+## Resultado
+
+Dos demos en vivo para redes sociales: una repostería y una boutique, cada una
+con su propia tipografía y paleta, generadas desde el mismo código.

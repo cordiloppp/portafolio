@@ -1,0 +1,50 @@
+---
+title: "Generador de videos verticales con IA"
+num: "05"
+problem: "Editar un short para TikTok o Reels toma horas: cortar silencios, subtitular, buscar imágenes y exportar en vertical."
+approach: "Pipeline en Python que convierte una nota de voz en un video 1080×1920 con subtítulos, cortes automáticos e imágenes de IA, y que nunca se detiene si falla un servicio externo."
+tags: ["Python", "ffmpeg", "faster-whisper", "PyTorch", "OpenCV", "NVENC"]
+featured: true
+order: 5
+repoUrl: "https://github.com/cordiloppp/generador-videos"
+cover: "/images/projects/generador.webp"
+---
+
+## El problema
+
+Quería publicar videos cortos con regularidad, pero editar cada uno a mano
+(quitar silencios y muletillas, poner subtítulos, conseguir imágenes, exportar
+en vertical) consumía más tiempo que grabarlo.
+
+## Mi enfoque
+
+Un generador por línea de comandos (o arrastrando un audio sobre un `.bat`)
+con tres modos:
+
+- **Animado:** un "escenario de papel" dibujado por código con una mascota y
+  stickers que siguen el guion.
+- **Imágenes de IA:** una imagen por frase con zoom suave (efecto Ken Burns).
+- **OBS:** toma una grabación de pantalla, hace jump cuts, la pasa a vertical
+  (blur, recorte o pantalla dividida) y la parte en varios shorts.
+
+Decisiones técnicas clave:
+
+- **Cadena de respaldo de proveedores:** transcripción con Groq → faster-whisper
+  local; imágenes con Pollinations → Cloudflare → SD-Turbo local. Si un servicio
+  falla, pasa al siguiente y lo registra en `plan.json`. Un servicio externo
+  nunca detiene el video.
+- **Cortes precisos:** los silencios se miden en el audio con `silencedetect` y
+  el audio se recorta en Python a la muestra exacta, porque el filtro `aselect`
+  de ffmpeg no era confiable.
+- **Mejora de voz** con DeepFilterNet más una cadena de ffmpeg tipo podcast.
+- **Optimizado para hardware modesto (GTX 1070):** skia-python era ~100× más
+  lento mezclando transparencias en esta CPU, así que las piezas se dibujan una
+  vez y cada cuadro se compone con OpenCV, con codificación por GPU (NVENC) y
+  respaldo automático a `libx264`.
+- Subtítulos `.ass` con estilos por plantilla y caché de transcripciones,
+  guiones y prompts.
+
+## Resultado
+
+De una nota de voz a un short listo para publicar, sin abrir un editor. Todo el
+código y los mensajes están en español.

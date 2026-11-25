@@ -13,15 +13,15 @@ export const siteConfig = {
   // Placeholder — replace with your real address before publishing.
   email: "molineroperez9@email.com",
   description:
-    "Estudiante de Ingeniería en Software próximo a graduarme. Construyo aplicaciones web escalables con Next.js y TypeScript, y me interesa el diseño de sistemas y escribir código que otros puedan mantener.",
+    "Estudiante de Ingeniería en Software próximo a graduarme. Construyo aplicaciones web full-stack con React, TypeScript, Python y Go, y productos reales para negocios locales. Me interesa el diseño de sistemas y escribir código que otros puedan mantener.",
   // Set NEXT_PUBLIC_SITE_URL in Vercel to your production domain.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://portafolio.vercel.app",
+  // Leave a link as "" to hide it on the site.
   links: {
-    // Placeholders — replace with your real profiles.
-    github: "#",
-    linkedin: "#",
-    resume: "#",
-    cv: "/cv.pdf",
+    github: "https://github.com/cordiloppp",
+    linkedin: "",
+    // Put your CV at public/cv.pdf and set this to "/cv.pdf" to show the button.
+    cv: "",
   },
 } as const;
 
@@ -33,25 +33,26 @@ export const navLinks: NavLink[] = [
 ];
 
 export const heroStack: string[] = [
-  "Next.js",
   "React",
+  "Next.js",
   "TypeScript",
-  "Node.js",
-  "Convex",
-  "Prisma",
-  "Tailwind",
+  "Python",
+  "FastAPI",
+  "Go",
+  "PostgreSQL",
+  "Docker",
 ];
 
 export const stackGroups: StackGroup[] = [
-  { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind"] },
-  { label: "Backend", items: ["Node.js", "Convex", "Prisma"] },
-  { label: "Data", items: ["MongoDB", "SQL"] },
-  { label: "Tooling", items: ["Git", "GitHub"] },
+  { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind", "Vite"] },
+  { label: "Backend", items: ["Python · FastAPI", "Go", "Node.js", "Convex", "Prisma"] },
+  { label: "Data", items: ["PostgreSQL", "SQLAlchemy", "sqlc", "MongoDB"] },
+  { label: "Tooling", items: ["Git", "GitHub", "Docker", "Vercel", "Pytest", "Playwright"] },
 ];
 
 export const archNodes: ArchNode[] = [
-  { layer: "Client", name: "Next.js", tech: "React + TS", arrow: true },
-  { layer: "API", name: "Convex", tech: "Realtime / RPC", arrow: true },
-  { layer: "Domain", name: "Prisma", tech: "Repository", arrow: true },
-  { layer: "Data", name: "Database", tech: "MongoDB / SQL", arrow: false },
+  { layer: "Client", name: "React", tech: "TypeScript + Vite", arrow: true },
+  { layer: "API", name: "FastAPI", tech: "REST + JWT", arrow: true },
+  { layer: "Domain", name: "Services", tech: "Reglas de negocio", arrow: true },
+  { layer: "Data", name: "PostgreSQL", tech: "SQLAlchemy + Alembic", arrow: false },
 ];

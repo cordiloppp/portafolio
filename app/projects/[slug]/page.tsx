@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -68,7 +69,44 @@ export default async function ProjectPage({
               <Badge key={tag}>{tag}</Badge>
             ))}
           </div>
+          {project.liveUrl || project.repoUrl ? (
+            <div className="mt-6 flex gap-[18px] font-mono text-[13px]">
+              {project.liveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent transition-opacity hover:opacity-80"
+                >
+                  Ver demo en vivo ↗
+                </a>
+              ) : null}
+              {project.repoUrl ? (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground transition-opacity hover:opacity-80"
+                >
+                  Código en GitHub ↗
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </header>
+
+        {project.cover ? (
+          <div className="relative mb-12 aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-surface-2">
+            <Image
+              src={project.cover}
+              alt={`Captura de ${project.title}`}
+              fill
+              priority
+              sizes="(min-width: 768px) 760px, 100vw"
+              className="object-cover object-top"
+            />
+          </div>
+        ) : null}
 
         <article className="prose-portfolio flex flex-col gap-5 text-[17px] leading-[1.7] text-muted">
           <MDXRemote source={project.body} />

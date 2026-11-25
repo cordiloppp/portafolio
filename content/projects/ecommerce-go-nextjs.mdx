@@ -1,0 +1,34 @@
+---
+title: "E-commerce full-stack en Go"
+num: "06"
+problem: "Construir una tienda de productos electrónicos completa (catálogo, carrito, cuentas, cupones y panel de administración) con un backend tipado y fácil de mantener."
+approach: "Monorepo con API REST en Go organizada por dominios en capas (handler → service → repository), consultas SQL tipadas con sqlc y todo el entorno en Docker Compose."
+tags: ["Go", "PostgreSQL", "sqlc", "Next.js", "TypeScript", "Docker"]
+featured: true
+order: 6
+repoUrl: "https://github.com/cordiloppp/ecommerce-go-nextjs"
+---
+
+## El problema
+
+Quería ir más allá de un CRUD y diseñar un backend con dominios reales de
+comercio electrónico: usuarios, productos, carrito, descuentos y órdenes.
+
+## Mi enfoque
+
+- **Backend en Go 1.22** con el router `chi` y `pgx/v5` para PostgreSQL.
+- **sqlc** genera código Go tipado a partir de SQL puro: las consultas se
+  escriben en SQL y los errores aparecen al compilar, no en producción.
+- **Organización por dominios** (`auth`, `user`, `product`, `cart`,
+  `discount`, `order`), cada uno en capas handler → service → repository.
+- **Autenticación con JWT** y panel de administración.
+- **Frontend en Next.js** con React, TypeScript y Tailwind.
+- **Docker Compose** orquesta PostgreSQL, API, frontend y Adminer; las
+  migraciones se aplican solas al arrancar y hay un seed con productos, un
+  usuario administrador y un cupón de ejemplo.
+- Pruebas con el race detector de Go y reporte de cobertura.
+
+## Resultado
+
+Una tienda que se levanta completa con `docker compose up --build`, sin
+instalar Go ni Node. El pago está simulado.
