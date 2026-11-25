@@ -10,8 +10,7 @@ export const siteConfig = {
   logo: "<jmp/>",
   role: "Software Developer enfocado en arquitectura",
   location: "Guatemala",
-  // Placeholder — replace with your real address before publishing.
-  email: "molineroperez9@email.com",
+  email: "molineroperez9@gmail.com",
   description:
     "Estudiante de Ingeniería en Software próximo a graduarme. Construyo aplicaciones web full-stack con React, TypeScript, Python y Go, y productos reales para negocios locales. Me interesa el diseño de sistemas y escribir código que otros puedan mantener.",
   // Set NEXT_PUBLIC_SITE_URL in Vercel to your production domain.

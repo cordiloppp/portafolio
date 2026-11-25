@@ -53,7 +53,7 @@ Edita tus datos (nombre, email, enlaces, stack) en `lib/site-config.ts`.
 ## Pendientes
 
 - Foto en `About` (hoy muestra un monograma) y `public/cv.pdf` (pon `links.cv: "/cv.pdf"` para mostrar el botón).
-- Email de contacto y LinkedIn en `lib/site-config.ts` (un enlace vacío `""` se oculta).
+- LinkedIn en `lib/site-config.ts` (un enlace vacío `""` se oculta).
 
 ## Deploy
 
