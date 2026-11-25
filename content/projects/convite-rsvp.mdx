@@ -11,7 +11,7 @@ repoUrl: "https://github.com/cordiloppp/convite-rsvp"
 cover: "/images/projects/convite.webp"
 ---
 
-> **Pruébalo:** [convite-rsvp.vercel.app](https://convite-rsvp.vercel.app) · usuario `demo@convite.mx` · contraseña `convite-demo-2026` · [invitación de ejemplo](https://convite-rsvp.vercel.app/i/demo-boda-pendiente)
+> **Pruébalo:** [convite-rsvp.vercel.app](https://convite-rsvp.vercel.app) · usuario `demo@convite.mx` · contraseña `convite-demo-2026` · [invitación de ejemplo](https://convite-rsvp.vercel.app/i/demo-boda-pendiente) · demo de solo lectura
 
 ## El problema
 
@@ -39,6 +39,9 @@ Decisiones técnicas clave:
   → `models` con SQLAlchemy 2 y migraciones con Alembic.
 - **Importación tolerante:** el CSV acepta coma o punto y coma, UTF-8 o
   Windows-1252 (Excel), importa las filas válidas y reporta las inválidas.
+- **Demo pública de solo lectura:** un middleware rechaza toda escritura salvo
+  que la sesión se haya abierto con la clave privada del dueño; el permiso viaja
+  como claim `rw` dentro del JWT.
 - **Exportación segura:** los textos se guardan como texto en Excel para evitar
   inyección de fórmulas.
 
