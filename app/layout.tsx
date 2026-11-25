@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    locale: "es_GT",
+    locale: "es_MX",
     url: siteConfig.url,
     siteName: `${siteConfig.shortName} · Portfolio`,
     title: `${siteConfig.shortName} — ${siteConfig.role}`,

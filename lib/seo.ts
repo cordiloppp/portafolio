@@ -14,7 +14,9 @@ export function personJsonLd() {
     email: `mailto:${siteConfig.email}`,
     address: {
       "@type": "PostalAddress",
-      addressCountry: "GT",
+      addressLocality: "Tijuana",
+      addressRegion: "Baja California",
+      addressCountry: "MX",
     },
     sameAs: [siteConfig.links.github, siteConfig.links.linkedin as string].filter(
       Boolean,

@@ -9,7 +9,7 @@ export const siteConfig = {
   shortName: "Jonathan Molinero",
   logo: "<jmp/>",
   role: "Software Developer enfocado en arquitectura",
-  location: "Guatemala",
+  location: "Tijuana",
   email: "molineroperez9@gmail.com",
   description:
     "Estudiante de Ingeniería en Software próximo a graduarme. Construyo aplicaciones web full-stack con React, TypeScript, Python y Go, y productos reales para negocios locales. Me interesa el diseño de sistemas y escribir código que otros puedan mantener.",
